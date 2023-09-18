@@ -43,7 +43,6 @@ void insertion_sort_list(listint_t **list)
 				node = node->prev;
 				print_list(*list);
 			}
-			node = *list;
 		}
 		else
 		{
