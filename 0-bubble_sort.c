@@ -1,5 +1,5 @@
 #include "sort.h"
-/*
+/**
  * funct_rev - function for inverting two values in an array
  * @x: pointer on first value
  * @y: pointer on second value
@@ -12,7 +12,7 @@ void funct_rev(int *x, int *y)
 	*y = temp;
 }
 
-/*
+/**
  * bubble_sort - function that sorts an array of integers in ascending
  * order using the Bubble sort algorithm
  * @array: pointer on array
