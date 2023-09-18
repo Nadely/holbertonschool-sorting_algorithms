@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * funct_rev - function for inverting two values in an array
+ * funct_rev_bis - function for inverting two values in an array
  * @x: pointer on first value
  * @y: pointer on second value
  * Return: nothing
