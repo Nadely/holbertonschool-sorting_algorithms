@@ -23,5 +23,7 @@ void print_array(const int *array, size_t size);
 
 void bubble_sort(int *array, size_t size);
 void funct_rev(int *x, int *y);
+void insertion_sort_list(listint_t **list);
+void funct_rev_bis(const int *x, const int *y);
 
 #endif /* SORT_H */
