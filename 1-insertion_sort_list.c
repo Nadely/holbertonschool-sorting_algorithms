@@ -1,19 +1,6 @@
 #include "sort.h"
 
 /**
- * funct_rev_bis - function for inverting two values in an array
- * @x: pointer on first value
- * @y: pointer on second value
- * Return: nothing
- */
-void funct_rev_bis(const int *x, const int *y)
-{
-	int temp = *x;
-	*(int *)x = *y;
-	*(int *)y = temp;
-}
-
-/**
  * insertion_sort_list - function that sorts a doubly linked list of integers
  * in ascending order using the Insertion sort algorithm
  *
@@ -21,32 +8,45 @@ void funct_rev_bis(const int *x, const int *y)
  *
  * Return: nothing
  */
+
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *node;
+	listint_t *node, *node_next, *temp;
 
-	if ((*list) == NULL || list == NULL || (*list)->next == NULL)
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
 	node = (*list)->next;
 
 	while (node != NULL)
 	{
-		if (node->next != NULL && (node->n > node->next->n))
-		{
-			funct_rev_bis(&(node->n), &(node->next->n));
-			print_list(*list);
+		node_next = node->next;
 
-			while (node->prev != NULL && (node->n < node->prev->n))
+		if (node->n < node->prev->n)
+		{
+			temp = node->prev;
+
+			while (temp != NULL && node->n < temp->n)
 			{
-				funct_rev_bis(&(node->n), &(node->prev->n));
-				node = node->prev;
+				temp->next = node->next;
+
+				if (node->next != NULL)
+					node->next->prev = temp;
+
+				node->next = temp;
+				node->prev = temp->prev;
+				temp->prev = node;
+
+				if (node->prev == NULL)
+					*list = node;
+
+				else
+					node->prev->next = node;
+
+				temp = node->prev;
 				print_list(*list);
 			}
 		}
-		else
-		{
-			node = node->next;
-		}
+		node = node_next;
 	}
 }
