@@ -30,14 +30,14 @@ void insertion_sort_list(listint_t **list)
 
 	node = *list;
 
-	while (node->next != NULL)
+	while (node != NULL)
 	{
-		if (node->next != NULL && node->n > node->next->n)
+		if (node->next != NULL && (node->n > node->next->n))
 		{
 			funct_rev_bis(&(node->n), &(node->next->n));
 			print_list(*list);
 
-			while (node->prev != NULL && node->n < node->prev->n)
+			while (node->prev != NULL && (node->n < node->prev->n))
 			{
 				funct_rev_bis(&(node->n), &(node->prev->n));
 				node = node->prev;
