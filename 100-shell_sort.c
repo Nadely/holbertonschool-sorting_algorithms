@@ -59,23 +59,16 @@ void shell_sort(int *array, size_t size)
 {
 	int knuth_sequence[100];
 	int temp;
-	size_t inv, interval, i, j;
-	size_t idx = 0;
+	size_t interval, i, j;
+	size_t idx = 1;
 
-	while (idx < size)
-	{
-		knuth_sequence[idx++] = 1;
-	}
+	if (array == NULL || size < 2)
+		return;
 
-	idx = 0;
-	while (idx < size && knuth_sequence[idx] < size)
-	{
-		idx++;
-	}
+	knuth(knuth_sequence, size);
 
-	while (idx > 0)
+	while ((size_t)knuth_sequence[idx] < size)
 	{
-		idx--;
 		interval = knuth_sequence[idx];
 
 		for (i = interval; i < size; i++)
@@ -88,9 +81,10 @@ void shell_sort(int *array, size_t size)
 			}
 			array[j] = temp;
 		}
+		idx++;
 	}
-
 	print_array(array, size);
 	bubble_sort(array, size);
+
 	print_array(array, size);
 }
