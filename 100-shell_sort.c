@@ -1,90 +1,37 @@
 #include "sort.h"
 
 /**
- * knuth - Knuth sequence
- * @sequence: pointer of array of stokage
- * @size: size of an array
- * Return: nothing
- */
-
-void knuth(int *sequence, size_t size)
-{
-	size_t n = 1;
-	size_t idx = 0;
-
-	while (n < size)
-	{
-		sequence[idx++] = n;
-		n = n * 3 + 1;
-	}
-}
-
-/**
- * bubble_sort - Function that sorts an array of integers in ascending order
- * using the Bubble sort algorithm
- * @array: pointer to array
- * @size: size of the array
- */
-void bubble_sort(int *array, size_t size)
-{
-	size_t i, j;
-	int temp;
-
-	if (array == NULL || size < 2)
-		return;
-
-	for (i = 0; i < size - 1; i++)
-	{
-		for (j = 0; j < size - i - 1; j++)
-		{
-			if (array[j] > array[j + 1])
-			{
-				temp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = temp;
-			}
-		}
-	}
-}
-
-/**
- * shell_sort - unction that sorts an array of integers in ascending order
- * using the Shell sort algorithm
- * @array: pointer on array's adress
- * @size: size of array
- * Return: nothing
+ * shell_sort - Tri un tableau d'entiers en utilisant l'algorithme de tri de Shell.
+ * @array: Le tableau à trier.
+ * @size: La taille du tableau.
  */
 
 void shell_sort(int *array, size_t size)
 {
-	int knuth_sequence[100];
-	int temp;
-	size_t interval, i, j;
-	size_t idx = 1;
+	size_t i, j, jump = 1;
+	int tmp;
 
 	if (array == NULL || size < 2)
 		return;
 
-	knuth(knuth_sequence, size);
+	while (jump < size/3)
+		jump = jump *3 + 1;
 
-	while ((size_t)knuth_sequence[idx] < size)
+	for (; jump > 0; jump = (jump - 1) / 3)
 	{
-		interval = knuth_sequence[idx];
-
-		for (i = interval; i < size; i++)
+		for (i = jump; i < size; i++)
 		{
-			temp = array[i];
-
-			for (j = i; j >= interval && array[j - interval] > temp; j -= interval)
+			tmp = array[i];
+			for (j = i; j >= jump && array[j - jump] > tmp;
+					j -= jump)
 			{
-				array[j] = array[j - interval];
+				if (array[j] != array[j - jump])
+					array[j] = array[j - jump];
 			}
-			array[j] = temp;
-		}
-		idx++;
-	}
-	print_array(array, size);
-	bubble_sort(array, size);
+			if (array[j] != tmp)
+				array[j] = tmp;
 
-	print_array(array, size);
+		}
+		print_array(array, size);
+	}
 }
