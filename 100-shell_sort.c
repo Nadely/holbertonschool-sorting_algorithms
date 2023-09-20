@@ -59,6 +59,7 @@ void shell_sort(int *array, size_t size)
 {
 	int knuth_sequence[100], temp;
 	size_t inv, interval, i, j;
+	
 	knuth(knuth_sequence, size);
 
 	if (array == NULL || size < 2)
