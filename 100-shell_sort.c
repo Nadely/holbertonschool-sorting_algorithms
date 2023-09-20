@@ -57,7 +57,7 @@ void bubble_sort(int *array, size_t size)
 
 void shell_sort(int *array, size_t size)
 {
-	int knuth_sequence[size], temp;
+	int knuth_sequence[100], temp;
 	size_t inv, interval, i, j;
 	knuth(knuth_sequence, size);
 
