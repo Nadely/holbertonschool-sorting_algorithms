@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * cocktail_sort_list - function that sorts a doubly linked list of integers
+ * cocktail_func - function that sorts a doubly linked list of integers
  * in ascending order using the Cocktail shaker sort algorithm
  *
  * @list: double pointer list's adress
@@ -9,17 +9,14 @@
  * Return: nothing
  */
 
-void cocktail_sort_list(listint_t **list)
+void cocktail_func(listint_t **list)
 {
 	int swapped;
 	listint_t *start = NULL;
 	listint_t *end = NULL;
 	listint_t *current = NULL;
 
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
-		return;
-
-	while (1)
+		while (1)
 	{
 		swapped = 0;
 		current = *list;
@@ -93,4 +90,21 @@ void cocktail_sort_list(listint_t **list)
 
 		start = current;
 	}
+}
+
+/**
+ * cocktail_sort_list - function that sorts a doubly linked list of integers
+ * in ascending order using the Cocktail shaker sort algorithm
+ *
+ * @list: double pointer list's adress
+ *
+ * Return: nothing
+ */
+
+void cocktail_sort_list(listint_t **list)
+{
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
+
+	cocktail_func(list);
 }
