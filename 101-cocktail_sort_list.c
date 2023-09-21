@@ -1,107 +1,106 @@
 #include "sort.h"
 
 /**
- * swap_nodes - Échange deux nœuds dans une liste doublement chaînée
- * @list: double pointeur vers la liste
- * @current: nœud actuel
- * Return: 1 si les nœuds ont été échangés, sinon 0
+ * swap - function that reverse value
+ *
+ * @head: double pointer head's adress
+ * @node1: pointer node1's adress
+ * @node2: pointer node1's adress
+ *
+ * Return: nothing
  */
-int swap_nodes(listint_t **list, listint_t *current)
+void swap(listint_t **head, listint_t *node1, listint_t *node2)
 {
-	if (current->n > current->next->n)
-	{
-		if (current->prev != NULL)
-			current->prev->next = current->next;
-		else
-			*list = current->next;
+	listint_t *temp_prev, *temp_next;
 
-		current->next->prev = current->prev;
-		current->prev = current->next;
-		current->next = current->next->next;
-		current->prev->next = current;
+	if (node1 == NULL || node2 == NULL || *head == NULL)
+		return;
 
-		if (current->next != NULL)
-			current->next->prev = current;
+	temp_prev = node1->prev;
+	temp_next = node2->next;
 
-		return (1);
-	}
-	return (0);
+	if (temp_prev != NULL)
+		temp_prev->next = node2;
+	if (temp_next != NULL)
+		temp_next->prev = node1;
+
+	node1->next = temp_next;
+	node1->prev = node2;
+
+	node2->next = node1;
+	node2->prev = temp_prev;
+
+	if (*head == node1)
+		*head = node2;
+	else if (*head == node2)
+		*head = node1;
+	print_list(*head);
 }
 
 /**
- * cocktail_forward - Trie une liste doublement chaînée dans l'ordre
- * croissant de gauche à droite
- * @list: double pointeur vers la liste
+ * cocktail_func - function that sorts a doubly linked list of integers
+ * in ascending order using the Cocktail shaker sort algorithm
+ *
+ * @list: double pointer list's adress
+ *
+ * Return: nothing
  */
-void cocktail_forward(listint_t **list)
+void cocktail_func(listint_t **list)
 {
-	int swapped = 1;
+	int swapped;
+	listint_t *start = NULL;
 	listint_t *end = NULL;
 	listint_t *current = NULL;
 
-	while (swapped)
+	while (1)
 	{
 		swapped = 0;
 		current = *list;
-
 		while (current->next != end)
 		{
-			if (swap_nodes(list, current))
+			if (current->n > current->next->n)
 			{
+				swap(list, current, current->next);
 				swapped = 1;
-				if (current->prev == NULL)
-					*list = current;
-				print_list(*list);
 			}
 			else
+			{
 				current = current->next;
+			}
+		}
+		if (!swapped)
+		{
+			break;
 		}
 		end = current;
-	}
-}
-
-/**
- * cocktail_backward - Trie une liste doublement chaînée dans l'ordre
- * croissant de droite à gauche
- * @list: double pointeur vers la liste
- */
-void cocktail_backward(listint_t **list)
-{
-	int swapped = 1;
-	listint_t *start = NULL;
-	listint_t *current = NULL;
-
-	while (swapped)
-	{
 		swapped = 0;
-		current = *list;
-
 		while (current->prev != start)
 		{
-			if (swap_nodes(list, current))
+			if (current->n < current->prev->n)
 			{
+				swap(list, current->prev, current);
 				swapped = 1;
-				if (current->prev == NULL)
-					*list = current;
-				print_list(*list);
 			}
 			else
+			{
 				current = current->prev;
+			}
 		}
 		start = current;
 	}
+	while (swapped);
 }
-
 /**
- * cocktail_sort_list - Trie une liste doublement chaînée dans l'ordre
- * croissant en utilisant l'algorithme de tri à bulles bidirectionnel
- * @list: double pointeur vers la liste
+ * cocktail_sort_list - function that sorts a doubly linked list of integers
+ * in ascending order using the Cocktail shaker sort algorithm
+ *
+ * @list: double pointer list's adress
+ *
+ * Return: nothing
  */
 void cocktail_sort_list(listint_t **list)
 {
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
-
-	cocktail_forward(list);
-	cocktail_backward(list);
+	cocktail_func(list);
 }
