@@ -69,9 +69,7 @@ void cocktail_func(listint_t **list)
 			}
 		}
 		if (!swapped)
-		{
 			break;
-		}
 		end = current;
 		swapped = 0;
 		while (current->prev != start)
@@ -87,8 +85,7 @@ void cocktail_func(listint_t **list)
 			}
 		}
 		start = current;
-	}
-	while (swapped);
+	} while (swapped);
 }
 /**
  * cocktail_sort_list - function that sorts a doubly linked list of integers
