@@ -29,8 +29,8 @@ int swap_nodes(listint_t **list, listint_t *current)
 }
 
 /**
- * cocktail_forward - Trie une liste doublement chaînée dans l'ordre croissant
- * de gauche à droite
+ * cocktail_forward - Trie une liste doublement chaînée dans l'ordre
+ * croissant de gauche à droite
  * @list: double pointeur vers la liste
  */
 void cocktail_forward(listint_t **list)
@@ -61,8 +61,8 @@ void cocktail_forward(listint_t **list)
 }
 
 /**
- * cocktail_backward - Trie une liste doublement chaînée dans l'ordre croissant
- * de droite à gauche
+ * cocktail_backward - Trie une liste doublement chaînée dans l'ordre
+ * croissant de droite à gauche
  * @list: double pointeur vers la liste
  */
 void cocktail_backward(listint_t **list)
@@ -93,8 +93,8 @@ void cocktail_backward(listint_t **list)
 }
 
 /**
- * cocktail_sort_list - Trie une liste doublement chaînée dans l'ordre croissant
- * en utilisant l'algorithme de tri à bulles bidirectionnel
+ * cocktail_sort_list - Trie une liste doublement chaînée dans l'ordre
+ * croissant en utilisant l'algorithme de tri à bulles bidirectionnel
  * @list: double pointeur vers la liste
  */
 void cocktail_sort_list(listint_t **list)
